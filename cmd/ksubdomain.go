@@ -1,8 +1,8 @@
 package main
 
 import (
-	"ksubdomain/core"
-	"ksubdomain/gologger"
+	"github.com/panda843/ksubdomain/core"
+	"github.com/panda843/ksubdomain/gologger"
 	"net"
 	"os"
 	"time"

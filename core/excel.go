@@ -1,8 +1,8 @@
 package core
 
 import (
+	"github.com/panda843/ksubdomain/gologger"
 	"github.com/tealeg/xlsx"
-	"ksubdomain/gologger"
 	"strings"
 )
 

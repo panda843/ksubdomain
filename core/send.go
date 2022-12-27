@@ -4,7 +4,7 @@ import (
 	"github.com/google/gopacket"
 	"github.com/google/gopacket/layers"
 	"github.com/google/gopacket/pcap"
-	"ksubdomain/gologger"
+	"github.com/panda843/ksubdomain/gologger"
 	"math/rand"
 	"net"
 	"sync"

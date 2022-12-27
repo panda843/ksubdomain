@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"github.com/google/gopacket/layers"
 	"github.com/logrusorgru/aurora"
-	"ksubdomain/gologger"
+	"github.com/panda843/ksubdomain/gologger"
 	"strconv"
 )
 

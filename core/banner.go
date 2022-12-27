@@ -1,7 +1,7 @@
 package core
 
 import (
-	"ksubdomain/gologger"
+	"github.com/panda843/ksubdomain/gologger"
 )
 
 const Version = "0.7"

@@ -2,9 +2,9 @@ package core
 
 import (
 	"bufio"
+	"github.com/panda843/ksubdomain/gologger"
+	_ "github.com/panda843/ksubdomain/statik"
 	"github.com/rakyll/statik/fs"
-	"ksubdomain/gologger"
-	_ "ksubdomain/statik"
 	"net"
 	"os"
 	"path/filepath"

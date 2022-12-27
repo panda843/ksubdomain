@@ -2,7 +2,7 @@ package core
 
 import (
 	"flag"
-	"ksubdomain/gologger"
+	"github.com/panda843/ksubdomain/gologger"
 	"os"
 	"strconv"
 )
