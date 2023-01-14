@@ -17,7 +17,7 @@ import (
 func PrintStatus() {
 	gologger.Printf("\rSuccess:%d Sent:%d Recved:%d Faild:%d", SuccessIndex, SentIndex, RecvIndex, FaildIndex)
 }
-func Start(options *Options) {
+func Start(options *Options, domainChan chan string) {
 	version := pcap.Version()
 	gologger.Infof(version + "\n")
 	var ether EthTable
@@ -34,7 +34,7 @@ func Start(options *Options) {
 	// 设定接收的ID
 	flagID := uint16(RandInt64(400, 654))
 	retryChan := make(chan RetryStruct, options.Rate)
-	go Recv(ether.Device, options, flagID, retryChan)
+	go Recv(ether.Device, options, flagID, retryChan, domainChan)
 	sendog := SendDog{}
 	sendog.Init(ether, options.Resolvers, flagID, true)
 
@@ -74,6 +74,14 @@ func Start(options *Options) {
 			gologger.Fatalf("打开文件:%s 出现错误:%s\n", options.FileName, err.Error())
 		}
 		f = f2
+	}
+
+	if options.Verify && options.FileName == "" && options.Domain != nil {
+		verifyFileData := ""
+		for _, dvalue := range options.Domain {
+			verifyFileData += dvalue + "\n"
+		}
+		f = strings.NewReader(verifyFileData)
 	}
 
 	if options.SkipWildCard {

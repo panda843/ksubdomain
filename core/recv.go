@@ -13,7 +13,7 @@ import (
 	"time"
 )
 
-func Recv(device string, options *Options, flagID uint16, retryChan chan RetryStruct) {
+func Recv(device string, options *Options, flagID uint16, retryChan chan RetryStruct, domainChan chan string) {
 	var (
 		snapshotLen int32         = 1024
 		promiscuous bool          = false
@@ -118,7 +118,7 @@ func Recv(device string, options *Options, flagID uint16, retryChan chan RetrySt
 				}
 				data := RecvResult{Subdomain: string(dns.Questions[0].Name)}
 				data.Answers = dns.Answers
-
+				domainChan <- data.Subdomain
 				msg := data.Subdomain + " => "
 				if !options.Silent {
 					for _, v := range data.Answers {

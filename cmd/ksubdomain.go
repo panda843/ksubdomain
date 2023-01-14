@@ -1,6 +1,7 @@
 package main
 
 import (
+	"fmt"
 	"github.com/panda843/ksubdomain/core"
 	"github.com/panda843/ksubdomain/gologger"
 	"net"
@@ -37,10 +38,22 @@ func test(options *core.Options) {
 	gologger.Printf("\r %ds 总发送:%d Packet 平均每秒速度:%dpps\n", tickTime, index, tickIndex)
 }
 func main() {
+	domainChan := make(chan string, 2)
+	go func() {
+		for data := range domainChan {
+			fmt.Printf("管道接受到的域名为%+v \n", data)
+			if data == "" {
+				fmt.Println("管道数据异常退出")
+				break
+			}
+		}
+	}()
 	options := core.ParseOptions()
+	fmt.Printf("%+v", options)
 	if options.Test {
 		test(options)
 		os.Exit(0)
 	}
-	core.Start(options)
+	core.Start(options, domainChan)
+	close(domainChan)
 }
